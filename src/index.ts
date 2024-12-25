@@ -1,4 +1,4 @@
-import { sayHello } from "./utils/hello.js";
+import { sayHello } from "@utils/hello.js";
 import * as os from "os";
 
 const systemUptime = os.uptime();
