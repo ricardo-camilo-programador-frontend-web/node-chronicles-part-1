@@ -1,9 +1,15 @@
 // import { sayHello } from "@utils/hello.ts";
-import { convertSecondsToHours } from "@utils/convertSecondsToHours.ts";
-import * as os from "os";
-import { showPathInfo } from "@utils/pathModule.ts";
+// import { convertSecondsToHours } from "@utils/convertSecondsToHours.ts";
+// import * as os from "os";
+// import { showPathInfo } from "@utils/pathModule.ts";
+import { createFile, writeFile, readFile, deleteFile } from "@utils/fsModule.ts";
 
-const systemUptime = convertSecondsToHours(os.uptime());
+// createFile("test.txt", "Hello World");
+// writeFile("test.txt", "Hello World - updated");
+// readFile("test.txt");
+deleteFile("test.txt");
+
+// const systemUptime = convertSecondsToHours(os.uptime());
 // const userInfo = os.userInfo();
 // const otherInfo = {
 //   name: os.type(),
@@ -14,9 +20,9 @@ const systemUptime = convertSecondsToHours(os.uptime());
 
 // console.log("userInfo:", userInfo);
 // console.log("otherInfo:", otherInfo);
-console.log("systemUptime:", systemUptime);
+// console.log("systemUptime:", systemUptime);
 
-showPathInfo();
+// showPathInfo();
 
 // sayHello("Ricardo");
 // sayHello("Camillus");
