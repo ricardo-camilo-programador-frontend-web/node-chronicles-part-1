@@ -3,10 +3,15 @@
 // import * as os from "os";
 // import { showPathInfo } from "@utils/pathModule.ts";
 // import { createFile, writeFile, readFile, deleteFile, renameFile } from "@utils/fsModule.ts";
-import { welcomeUser, myEmitter } from "@utils/eventDrivenProgramming.ts";
+import { welcomeUser, myEmitter, sayHello } from "@utils/eventDrivenProgramming.ts";
 
-myEmitter.on('userJoined', welcomeUser);
-myEmitter.emit('userJoined');
+const userJoinedEventName = 'userJoined';
+
+myEmitter.on(userJoinedEventName, welcomeUser);
+myEmitter.on(userJoinedEventName, sayHello);
+
+myEmitter.emit(userJoinedEventName);
+
 
 
 // createFile("test.txt", "Hello World");
