@@ -2,13 +2,18 @@
 // import { convertSecondsToHours } from "@utils/convertSecondsToHours.ts";
 // import * as os from "os";
 // import { showPathInfo } from "@utils/pathModule.ts";
-import { createFile, writeFile, readFile, deleteFile, renameFile } from "@utils/fsModule.ts";
+// import { createFile, writeFile, readFile, deleteFile, renameFile } from "@utils/fsModule.ts";
+import { welcomeUser, myEmitter } from "@utils/eventDrivenProgramming.ts";
+
+myEmitter.on('userJoined', welcomeUser);
+myEmitter.emit('userJoined');
+
 
 // createFile("test.txt", "Hello World");
 // writeFile("test.txt", "Hello World - updated");
 // readFile("test.txt");
 // deleteFile("test.txt");
-renameFile("test.txt", "testRenamed.txt");
+// renameFile("test.txt", "testRenamed.txt");
 
 // const systemUptime = convertSecondsToHours(os.uptime());
 // const userInfo = os.userInfo();
