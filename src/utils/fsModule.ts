@@ -27,3 +27,10 @@ export function deleteFile(path: string) {
     console.log("File deleted successfully");
   })
 }
+
+export function renameFile(path: string, newPath: string) {
+  fs.rename(path, newPath, (err) => {
+    if (err) throw err;
+    console.log("File renamed successfully");
+  })
+}
