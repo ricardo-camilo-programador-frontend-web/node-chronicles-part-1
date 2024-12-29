@@ -1,6 +1,7 @@
 // import { sayHello } from "@utils/hello.ts";
 import { convertSecondsToHours } from "@utils/convertSecondsToHours.ts";
 import * as os from "os";
+import { showPathInfo } from "@utils/pathModule.ts";
 
 const systemUptime = convertSecondsToHours(os.uptime());
 // const userInfo = os.userInfo();
@@ -15,6 +16,7 @@ const systemUptime = convertSecondsToHours(os.uptime());
 // console.log("otherInfo:", otherInfo);
 console.log("systemUptime:", systemUptime);
 
+showPathInfo();
 
 // sayHello("Ricardo");
 // sayHello("Camillus");
