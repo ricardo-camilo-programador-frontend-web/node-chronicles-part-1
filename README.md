@@ -1,7 +1,6 @@
 ## 📚 Overview
 Learning Node.js fundamentals following freeCodeCamp's tutorial. This repository contains hands-on examples and projects to help you master Node.js core concepts.
 
-## 🎯 What You'll Learn
 - **Built-in Modules:**
   - 💻 OS Module
   - 🗂️ PATH Module
