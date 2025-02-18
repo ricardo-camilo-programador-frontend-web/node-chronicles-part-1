@@ -1,4 +1,4 @@
-import path from "path";
+import path from 'path'
 
 const myPath = String.raw`C:\programming\githu-pessoal\node-chronicles-part-1\src\utils`
 
@@ -11,5 +11,5 @@ const pathInfo = {
 }
 
 export function showPathInfo() {
-  console.log(pathInfo);
+  console.log(pathInfo)
 }
