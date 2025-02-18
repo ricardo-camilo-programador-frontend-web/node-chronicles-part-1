@@ -17,7 +17,7 @@ A basic web server project in Node.js that demonstrates fundamental concepts of 
 - TypeScript
 - HTML
 - Git
-- Netlify (Deploy)
+- Replit (Deploy)
 
 ## 🚀 Implemented Features
 - Custom HTTP server without frameworks
