@@ -18,7 +18,11 @@ const server = http.createServer(async (req, res) => {
       "/": "index.html",
       "/about": "about.html",
       "/contact": "contact.html",
-      "/404": "404.html"
+      "/404": "404.html",
+      "/pt": "index-pt.html",
+      "/pt/sobre": "sobre.html",
+      "/pt/contato": "contato.html",
+      "/pt/404": "404-pt.html"
     };
 
     if (routeMap[parsedUrl.pathname]) {
