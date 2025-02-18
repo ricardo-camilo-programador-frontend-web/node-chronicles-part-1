@@ -1,53 +1,60 @@
-// import { sayHello } from "@utils/hello.ts";
-// import { convertSecondsToHours } from "@utils/convertSecondsToHours.ts";
-// import * as os from "os";
-// import { showPathInfo } from "@utils/pathModule.ts";
-// import { createFile, writeFile, readFile, deleteFile, renameFile } from "@utils/fsModule.ts";
-import { welcomeUser, myEmitter, sayHello } from "@utils/eventDrivenProgramming.ts";
+import http from "node:http";
+import { promises as fs } from "node:fs";
+import path from "node:path";
 
-const userJoinedEventName = 'userJoined';
+const server = http.createServer(async (req, res) => {
+  try {
+    const baseURL = `http://${req.headers.host}/`;
+    const parsedUrl = new URL(req.url || "/", baseURL);
 
-myEmitter.on(userJoinedEventName, welcomeUser);
-myEmitter.on(userJoinedEventName, sayHello);
+    const safePath = parsedUrl.pathname.replace(/\.\./g, "");
+    let filePath = path.join(
+      process.cwd(),
+      "src",
+      safePath === "/" ? "index.html" : safePath
+    );
 
-myEmitter.emit(userJoinedEventName);
+    const routeMap: Record<string, string> = {
+      "/": "index.html",
+      "/about": "about.html",
+      "/contact": "contact.html",
+      "/404": "404.html"
+    };
 
+    if (routeMap[parsedUrl.pathname]) {
+      filePath = path.join(process.cwd(), "src", routeMap[parsedUrl.pathname]);
+    }
 
+    if (!filePath.endsWith(".html")) {
+      filePath += ".html";
+    }
 
-// createFile("test.txt", "Hello World");
-// writeFile("test.txt", "Hello World - updated");
-// readFile("test.txt");
-// deleteFile("test.txt");
-// renameFile("test.txt", "testRenamed.txt");
+    try {
+      await fs.access(filePath);
+    } catch (error) {
+      filePath = path.join(process.cwd(), "src", "404.html");
+      res.writeHead(404, { "Content-Type": "text/html" });
+      const content = await fs.readFile(filePath);
+      return res.end(content);
+    }
 
-// const systemUptime = convertSecondsToHours(os.uptime());
-// const userInfo = os.userInfo();
-// const otherInfo = {
-//   name: os.type(),
-//   release: os.release(),
-//   totalMem: os.totalmem(),
-//   freeMem: os.freemem(),
-// }
+    const content = await fs.readFile(filePath);
 
-// console.log("userInfo:", userInfo);
-// console.log("otherInfo:", otherInfo);
-// console.log("systemUptime:", systemUptime);
+    res.writeHead(200, {
+      "Content-Type": "text/html",
+      "Content-Length": Buffer.byteLength(content)
+    });
+    res.end(content);
 
-// showPathInfo();
+  } catch (error) {
+    console.error("Server error:", error);
+    if (!res.headersSent) {
+      res.writeHead(500, { "Content-Type": "text/plain" });
+    }
+    res.end("Internal Server Error");
+  }
+});
 
-// sayHello("Ricardo");
-// sayHello("Camillus");
-// sayHello("Bloodfallen")
-
-
-// declare global {
-//   var myVariable: string;
-// }
-
-// global.myVariable = "Hellow World";
-
-// console.log("myVariable:", myVariable);
-
-// console.log("dirname:", __dirname);
-
-// console.log("filename:", __filename);
+server.listen(8000, () => {
+  console.log("Server is running on port 8000");
+});
