@@ -1,18 +1,23 @@
 {
 	"name": "node-chronicles-part-1",
 	"version": "1.0.0",
-	"main": "dist/index.js",
+	"main": "dist/app.js",
 	"scripts": {
-		"dev": "ts-node -r tsconfig-paths/register src/index.ts",
+		"dev": "ts-node -r tsconfig-paths/register src/app.ts",
 		"build": "tsc",
-		"start": "node dist/index.js",
+		"start": "node dist/app.js",
 		"style-fix": "prettier --write ."
 	},
 	"devDependencies": {
+		"@types/express": "^5.0.0",
 		"@types/node": "^22.10.2",
 		"prettier": "^3.5.1",
 		"ts-node": "^10.9.2",
 		"tsconfig-paths": "^4.2.0",
 		"typescript": "^5.7.2"
+	},
+	"dependencies": {
+		"dotenv": "^16.4.7",
+		"express": "^4.21.2"
 	}
 }
