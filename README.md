@@ -1,3 +1,4 @@
+[![CI](https://github.com/ricardo-camilo-programador-frontend-web/node-chronicles-part-1/actions/workflows/ci.yml/badge.svg)](https://github.com/ricardo-camilo-programador-frontend-web/node-chronicles-part-1/actions)
 🔗 Demo online: https://replit.com/@ricardo564/zenith-node-chronicles-part-1
 
 # 🌟 Zenith Node Chronicles - Part 1

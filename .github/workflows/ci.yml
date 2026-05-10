@@ -10,13 +10,17 @@ jobs:
   build:
     name: Build do Projeto
     runs-on: self-hosted
-    continue-on-error: true
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
 
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Instalar dependencias
         run: pnpm install --ignore-scripts
@@ -41,6 +45,11 @@ jobs:
 
       - name: Setup PATH
         run: echo "/usr/local/bin" >> $GITHUB_PATH
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
 
       - name: Instalar dependencias
         run: pnpm install --ignore-scripts
@@ -64,3 +73,25 @@ jobs:
           fi
 
           exit "$status"
+
+  sonar:
+    name: Analise SonarQube
+    runs-on: self-hosted
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup PATH
+        run: echo "/usr/local/bin" >> $GITHUB_PATH
+      - name: Cache pnpm store
+        uses: actions/cache@v3
+        with:
+          path: ~/.local/share/pnpm/store
+          key: pnpm-${{ hashFiles('pnpm-lock.yaml') }}
+
+      - name: Instalar dependencias
+        run: pnpm install --ignore-scripts
+
+      - name: Run SonarScanner
+        env:
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+        run: /opt/sonar-scanner/bin/sonar-scanner
