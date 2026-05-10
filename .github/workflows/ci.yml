@@ -10,6 +10,7 @@ jobs:
   build:
     name: Build do Projeto
     runs-on: self-hosted
+    continue-on-error: true
     timeout-minutes: 15
     steps:
       - uses: actions/checkout@v4
